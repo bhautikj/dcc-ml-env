@@ -3,4 +3,7 @@
 Icon\r
 Thumbs.db
 desktop.ini
-
+__pycache__/
+.coverage
+*.egg-info
+plans/*

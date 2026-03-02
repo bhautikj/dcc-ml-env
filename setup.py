@@ -1,21 +1,28 @@
+# setup.py
 from setuptools import setup, find_packages
 
-# Define your package metadata here
 setup(
-    name='dcc-wrapper-genai',
-    version='0.0.1',
-    description='A toy tool for wrapping genAI tools to make them function more like iterable digital content creation tools.',
-    author='Bhautik Joshi',
-    author_email='bjoshi@gmail.com',
-    #url='https://github.com/yourusername/my_project',  # Optional: Repository URL
-    packages=find_packages(where='src'),
-    package_dir={'': 'src'},
-    install_requires=[
-        # List your project dependencies here
-        # For example:
-        # 'numpy>=1.20.0',
-        # 'pandas>=1.3.0'
-    ],
+    name="dcc-ml-env",
+    version="0.1.0",
+    packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'dcc-wrapper-genai=main:main',  # Example entry point to run src/main.py
+            'dcc-ml-env=src.main:main',
+        ],
+    },
+    install_requires=[
+        # Add dependencies here
+    ],
+    author="DCC-Workon Team",
+    author_email="team@dcc-workon.com",
+    description="Creative work environment manager for small teams",
+    long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
+    #url="https://github.com/dcc-workon/dcc-workon",
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: Unix",
+    ],
+    python_requires='>=3.6',
+)

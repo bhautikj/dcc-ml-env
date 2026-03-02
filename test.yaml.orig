@@ -1,0 +1,35 @@
+working_directory: "/tmp/foo"
+
+tools:
+  - name: "wan2gp"
+    type: "wan2gp"
+    version: "20260216"
+    path: "/home/bjoshi/src/dcc-tools/Wan2GP-20260216"
+    env: "wan2gp"
+    models:
+      - name: "ckpts"
+        subtype: "ckpts"
+        path: "/home/bjoshi/models/video/wan2gp-ckpts"
+      - name: "lora"
+        subtype: "lora"
+        path: "/home/bjoshi/models/video/wan2gp-loras-wan2.1"
+      - name: "i2v"
+        subtype: "i2v"
+        path: "/home/bjoshi/models/video/wan2gp-loras-wan2.1"
+
+  - name: "comfyui"
+    type: "comfyui"
+    version: "20260219"
+    path: "/home/bjoshi/src/dcc-tools/ComfyUI-20260219"
+    env: "comfyui"
+    models:
+      - name: "ckpts"
+        subtype: "ckpts"
+        path: "/home/bjoshi/models/models.comfy"
+
+  - name: "rife"
+    type: "rife"
+    version: "20221029"
+    path: "/home/bjoshi/src/dcc-tools/rife-ncnn-vulkan-20221029-ubuntu"
+    env: "base"
+
