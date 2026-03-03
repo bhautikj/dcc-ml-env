@@ -188,8 +188,7 @@ class ToolWan2GP(ToolBase):
                             config_file_path]
             
             launcherCmd += loras_args
-            launcherCmd += ["--listen", "\n"]
-            launcherCmd += '"$@"'
+            launcherCmd += ["--listen", '"$@"', "\n"]
             print(launcherCmd)
             launcherScript =  "#!/bin/bash \n"
             launcherScript += "pushd " + str(tool_dest_path) + "\n"

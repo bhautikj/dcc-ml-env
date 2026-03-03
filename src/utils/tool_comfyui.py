@@ -181,8 +181,7 @@ class ToolComfyUI(ToolBase):
                             str(input_dest_path),
                             "--output-directory",
                             str(output_dest_path)]            
-            launcherCmd += ["--listen", "\n"]
-            launcherCmd += '"$@"'
+            launcherCmd += ["--listen", '"$@"', "\n"]
             print(launcherCmd)
             launcherScript =  "#!/bin/bash \n"
             launcherScript += "pushd " + str(tool_dest_path) + "\n"
