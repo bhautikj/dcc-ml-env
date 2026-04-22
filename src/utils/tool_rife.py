@@ -21,8 +21,19 @@ filename="${filename%.*}"
 dirpath=$(dirname "$1")
 target=$dirpath"/"$filename-$substr.$extension
 
+if [[ -f "$target" ]]; then
+  echo "exists, skipping " $filename
+  exit 0
+fi
+
 if [[ $filename == *"$substr"* ]]; then
-  echo "skipping " $filename
+  echo "already processed, skipping " $filename
+  exit 0
+fi
+
+FILE_SIZE=$(wc -c "$1" | awk '{print $1}')
+if [[ "$FILE_SIZE" -lt "$MIN_SIZE" ]]; then
+  echo "not ready, skipping " $filename
   exit 0
 fi
 
@@ -34,10 +45,13 @@ echo $dirpath $filename $extension
 echo $target
 echo $FRAMENUM $TARGETFRAMES
 
+# drop last frame
+#ffmpeg -ss 0.0625 -i "$1" -c:v libx264 -c:a aac "$2"
+
 # extract frames
 echo "==EXTRACTING FRAMES=="
 mkdir /tmp/$UUID-input
-`ffmpeg -i "$1" /tmp/$UUID-input/frame_%08d.png`
+`ffmpeg -ss 0.0625 -i "$1" /tmp/$UUID-input/frame_%08d.png`
 
 # gen frames
 echo "==GENERATING FRAMES=="
@@ -46,7 +60,7 @@ mkdir /tmp/$UUID-output
 
 # recombine
 echo "==RECOMBINING FRAMES=="
-`ffmpeg -framerate $TARGETFPS -i /tmp/$UUID-output/%08d.png -crf 20 -c:v libx264 -pix_fmt yuv420p "$target"`
+`ffmpeg -framerate $TARGETFPS -i /tmp/$UUID-output/%08d.png -crf 18 -c:v libx264 -pix_fmt yuv420p "$target"`
 rm -rf /tmp/$UUID-output
 rm -rf /tmp/$UUID-input
 """
